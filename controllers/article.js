@@ -1,43 +1,45 @@
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://root:qwerty@localhost:3306/joga_sequelize');
-const models = require('../models');
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize('mysql://root:qwerty@localhost:3306/joga_sequelize')
 
+const models = require('../models')
 
-
-const getAllArticles = (req, res) => {
+const getAllArticles = (req,res) =>{
     models.Article.findAll()
-        .then(articles => {
-            console.log(articles);
-            return res.status(200).json( {articles});
+        .then(articles =>{
+            console.log(articles)
+            return res.status(200).json({article});
         })
-        .catch(err => {
-            return res.status(500).send(err.message);
+        .catch(error=>{
+            return res.status(500).send(error.message);
         })
 }
-const getArticleBySlug = (req, res) => {
+
+const getArticleBySlug = (req,res) =>{
     models.Article.findOne({
         where: {
-            slug: req.params.slug
+            slug:req.params.slug
         },
-        include: [{
-            model: models.Author,
-        },
+        include: [
+            {
+                model: models.Author,
+            },
             {
                 model: models.Tags,
-                through: {
-                    model: models.ArticleTags
+                through:{
+                    model: models.ArticleTag
                 }
             }
         ],
     })
-        .then(article => {
+        .then(article =>{
             console.log(article)
             return res.status(200).json({article});
         })
-        .catch(error => {
+        .catch(error=>{
             return res.status(500).send(error.message);
         })
 }
+
 const getArticleByAuthor = (req,res) =>{
     models.Article.findAll({
         where: {
@@ -52,8 +54,9 @@ const getArticleByAuthor = (req,res) =>{
             return res.status(500).send(error.message);
         })
 }
+
 module.exports = {
     getAllArticles,
     getArticleBySlug,
-    getArticleByAuthor,
+    getArticleByAuthor
 }

@@ -1,18 +1,21 @@
 'use strict';
-const {
-  Model, Sequelize
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Article extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Authors,{
+      this.belongsTo(models.Author,{
         foreignKey: {
           name: 'AuthorId',
           field: 'author_id',
         }
       })
-      this.belongsToMany(models.Tags, {
+      this.belongsToMany(models.Tag, {
         foreignKey: 'articleId',
         through: 'ArticleTags',
       })
@@ -20,33 +23,35 @@ module.exports = (sequelize, DataTypes) => {
   }
   Article.init({
     id: {
-      type: DataTypes.INTEGER,
+      type:DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
+      primaryKey:true,
+      allowNull:false
     },
     name: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type:DataTypes.STRING,
+      allowNull:false
     },
     slug: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      type:DataTypes.STRING,
+      allowNull:false,
+      unique:true
     },
     image: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type:DataTypes.STRING,
+      allowNull:false
     },
     body: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      type:DataTypes.TEXT,
+      allowNull:false
     },
     published: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type:DataTypes.DATE,
+      allowNull:false
     },
-    author_id: DataTypes.INTEGER
+    author_id: {
+      type:DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'Article',

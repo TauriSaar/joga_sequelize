@@ -4,47 +4,45 @@
 module.exports = {
     up (queryInterface, Sequelize) {
         return Promise.all([
-            queryInterface.bulkInsert('tags', [{
-                name: 'yogapractice',
+            queryInterface.bulkInsert('Tags', [{
+                name:'yogapractice',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'yogainspiration',
+            queryInterface.bulkInsert('Tags', [{
+                name:'yogainspiration',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'wellness',
+            queryInterface.bulkInsert('Tags', [{
+                name:'wellness',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'nature',
+            queryInterface.bulkInsert('Tags', [{
+                name:'nature',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'spiritual',
+            queryInterface.bulkInsert('Tags', [{
+                name:'spiritual',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'sport',
+            queryInterface.bulkInsert('Tags', [{
+                name:'sport',
                 createdAt: new Date(),
                 updatedAt: new Date()
             }]),
-            queryInterface.bulkInsert('tags', [{
-                name: 'yogateacher',
+            queryInterface.bulkInsert('Tags', [{
+                name:'yogateacher',
                 createdAt: new Date(),
                 updatedAt: new Date()
-            }])
+            }]),
         ])
     },
 
     down (queryInterface, Sequelize) {
-        return Promise.all([
-            queryInterface.bulkDelete('tags', null, {})
-        ])
+        return queryInterface.bulkDelete('Tags', null, {});
     }
 };
